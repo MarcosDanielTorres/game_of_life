@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'cell.dart';
 import 'dart:math';
 import 'gradient_appbar.dart';
+import 'dart:async';
 
 enum gg { hola }
 
@@ -59,7 +60,7 @@ class BoardState extends State<Board> {
                 ),
                 IconButton(
                   icon: Icon(Icons.crop_5_4),
-                  onPressed: () => xd(),
+                  onPressed: () => manejarEstados(),
                 ),
                 createBoard(),
               ],
@@ -76,12 +77,14 @@ class BoardState extends State<Board> {
     });
   }
 
-  void xd() {
-    setState(() {
-      print("Hola");
-      correr();
-    });
+  void manejarEstados() async {
+    await Future.value(() => setState(() {
+          correr();
+        }));
   }
+
+  Future<void> gatherNewsReports() =>
+      Future.delayed(Duration(seconds: 1), () => correr);
 
   Widget createBoard() {
     List<Row> list = <Row>[];
